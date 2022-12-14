@@ -29,6 +29,13 @@ Orders are transmitted without delay through communication channels from one inv
 
 Quantities travel throuhg two different kind of transports
 
+### Default simulator initial configuration
+
+The following parameter initial values are given for information about the simulator behavior. Note however that these variables are not all available for configuration from the inkling file (for those values, refer to 'Connection to Bonsai -> Simulator configuration' below).
+
+* Supplier:
+ * Capacity: infinite
+
 
 ### Processes scheduling and global Brain-Simulator behavior
 The global behavior of the simulator and the impact that a Bonsai's brain actions have on it during training depend both on the ordering of processes execution within the model and on the place of Bonsai's brain actions within that ordering. The following sequence summarizes this processes scheduling:
@@ -55,24 +62,39 @@ The global behavior of the simulator and the impact that a Bonsai's brain action
   
 Note that most of the values of states available for teaching or monitoring in Bonsai are those at the end of each Repeat block, whereas the CurrentDemand value is the new value for the new simulation step loaded at the end of the Repeat block.  That is, the value of the CurrentDemand (and CurrentDemandWithBacklog) is in advance of all other states values by one simulation step. Therefore, values for other states such as the FulfilledDemand correspond to the previous step CurrentDemand.
 
-
-
-
 ### Connection to Bonsai
 
-#### Simulator states available for training and monitoring
-##### For training:
-On hand quantity and already ordered quantities for each Inventory.
-Current demand for each Retailer
+#### Available simulator states
+The following state variables are made available to Bonsai at each simulation step through the connector interface.
+From these variables, the IncrementProfit, CurrentServiceLevel, OnHandInventory(\_1,\_2,\_Hub) and AlreadyOrderedQuantity(\_1,\_2,\_Hub) have been made available for training in the inkling file, all other variables are made available for visualization of the simulator state during training or assessment.
 
-For other available states, see the generated inkling
+Note that it is possible to change the inkling file to use other set of variables for training if you want to test an alternative training.
+
+##### For training :
+On hand quantity and already ordered quantities for each Inventory.
+* IncrementProfit (float): Increment of aggregated profit over both retailers at each simulation step (float)
+* CurrentServiceLevel (float in [0,1]) : Average of ImmediatelyFulfilledDemand(at current step)/CurrentDemand(at previous step) for both retailers 
+* OnHandInventory_1, OnHandInventory_2, OnHandInventory_Hub: current stock at each (non-supplier) inventory (all float)
+* AlreadyOrderedQuantity_1, AlreadyOrderedQuantity_2, AlreadyOrderedQuantity_Hub : cummulated quantity already ordered by each (non-supplier) inventory (all float)
+* CurrentDemand_1, CurrentDemand_2: Demand for each retailer at the current time step (both float)
+
+##### Additional simulator outputs used for monitoring, not used for training
+* BacklogQuantity_1, BacklogQuantity_2: cummulated unserved demand for each retailer (both float)
+* QuantityOrderedByPlane_1,QuantityOrderedByPlane_2, QuantityOrderedThroughHub_1, QuantityOrderedThroughHub_2: (all float),
+* QuantityAtDestination_Truck1, QuantityAtDestination_Truck2, QuantityAtDestination_Plane1, QuantityAtDestination_Plane2, QuantityAtDestination_Train: (all float)
+* FulfilledDemand_1, FulfilledDemand_2: cummulated demand that has been served (either immediatly or not, up to the previous step) by each Retailer (both float)
+* ImmediatlyFulfilledDemand_1, ImmediatlyFulfilledDemand_2: demand that has been served immediatly (at the previous step) by each Retailer (both float)
 
 #### Brain actions
 The bonsai brain actions override and control the inventories' decision policies through the simulation controler. There are two different decisions produced by the brain for each inventory: the quantity to be ordered and the allocation of that order to upstream inventories. These actions are, for the sample instance:
 * Order_Inventory1, Order_Inventory2 and Order_InventoryHub (Quantities ordered by each retailer and by the hub, positive real numbers)
 * Inventory1_AllocateToHub and Inventory2_AllocateToHub (proportion ordered by each Retailer that is allocated to the Hub, real number between 0 and 1, the complement is ordered directly to the supplier)
 
-#### Other simulator states available for monitoring
+#### Simulator configuration
+The following simulator parameters are available for configuration from the inkling file. Note that you can change the inkling file to set different values for this parameters if you want to test alternative trainings.  
+    
+* HoldingCostPerPiece_Inventory1, HoldingCostPerPiece_Inventory2, HoldingCostPerPiece_InventoryHub: holding costs per piece for Retailer 1, Retailer 2 and Hub inventories(all float; default values are: 2, 2 and 3 respectively)
+* TransportCostPerPiece_Plane1, TransportCostPerPiece_Plane2, TransportCostPerPiece_Truck1, TransportCostPerPiece_Truck2, TransportCostPerPiece_Train: transport costs per piece for each Transport entity (all float; default values are 25,25,3,3 and 5, respectively)
 
 
 
