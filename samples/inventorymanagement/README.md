@@ -30,22 +30,30 @@ Orders are transmitted without delay through communication channels from one inv
 Quantities travel throuhg two different kind of transports
 
 
-### Global Brain-Simulator behavior
-The global behavior of the simulator and the impact that a Bonsai's brain actions have on its behavior during training depend both on the ordering of processes execution in the model and on the place of Bonsai's brain actions within that ordering. Shortly, the following sequence is repeated at each simulation step:
+### Processes scheduling and global Brain-Simulator behavior
+The global behavior of the simulator and the impact that a Bonsai's brain actions have on it during training depend both on the ordering of processes execution within the model and on the place of Bonsai's brain actions within that ordering. The following sequence summarizes this processes scheduling:
 
-For each Retailer: set demand on own inventory
-Bonsai brain: reads state
-Bonsai brain: send actions (set quantities to order and source allocations on Retailer1, Retailer2 and Hub Inventories)
-For each inventory (1,2,Hub) : set quantities to order and source allocation to those set by the brain, send orders to upstream inventories
-Supplier: produce quantities
-Supplier inventory: collect production and prepare shipments
-  For each Transport from supplier (Plane1, Plane2,Train): collect shipments, advance shipments being transported, prepare and deliver shipments
-Hub inventory: collect input quantities and prepare shipments
-For each Transport from Hub (Truck1, Truck2):  collect shipments, advance shipments being transported, prepare and deliver shipments
-For each output inventory (1 and 2): collects received quantities and prepare shipments for Retailer
-For each Retailer: serve demand
+* For each Retailer: set demand on own inventory
+* Repeat N times:
+  * Bonsai brain: reads state
+  * Bonsai brain: send actions (set quantities to order and source allocations on Retailer1, Retailer2 and Hub Inventories)
+  * For each inventory (1,2,Hub) : set quantities to order and source allocation to those set by the brain, send orders to upstream inventories
+  * Supplier: produce quantities
+  * Supplier inventory: collect production and prepare shipments
+     * For each Transport from supplier (Plane1, Plane2,Train): collect shipments, advance shipments being transported, prepare and deliver shipments
+  * Hub inventory: collect input quantities and prepare shipments
+  * For each Transport from Hub (Truck1, Truck2):  collect shipments, advance shipments being transported, prepare and deliver shipments arriving at destination
+  * For each Retailer:
+    * Own inventory: collect received quantities and prepare them for Retailer
+    * Serve demand
+  * Update persistent state variables: HoldingCost (Inventories), Supplier Capacity,
+  * Clear temporal state variables: 
+  * Increment time
+  * For each Retailer: 
+    * Update CurrentDemand and CurrentDemandWithBacklog
+    * Set Inventory::Demand with CurrentDemand
   
-
+Note that most of the values of states available for teaching or monitoring in Bonsai are those at the end of each Repeat block, whereas the CurrentDemand value is the new value for the new simulation step loaded at the end of the Repeat block.  That is, the value of the CurrentDemand (and CurrentDemandWithBacklog) is in advance of all other states values by one simulation step. Therefore, values for other states such as the FulfilledDemand correspond to the previous step CurrentDemand.
 
 
 
