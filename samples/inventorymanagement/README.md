@@ -1,6 +1,11 @@
 # Inventory Management sample
 Demo instance of the Cosmo Tech Inventory Management conceptual model
 
+## Files available in this folder:
+* README.me (this file): describes the Inventory Management demo simulator provided by the sample as well as the connector to Bonsai
+* Cosmo_Tech_Inventory_Management_Demo_With_Bonsai.pdf: slides describing the sample project in more detail
+
+
 ## Use case
 Inventory management of supply chain inventories under uncertain and volatile demand.
 
@@ -13,7 +18,10 @@ An intelligent global control policy for the management of the supply chain inve
 
 ### Inventory Management conceptual model
 
-The inventory management simulator provided for this sample use case is an instance of an Inventory Management model. Other more complex instances of this model can easily be built for different and more complex scenarios and use cases (see https://cosmotech.com/platform/ for more information). The following is a short summary of this conceptual model, where only the most important elements, useful for a better understanding of the provided instance simulator and is interaction with the Bonsai brain, are mentioned.
+The inventory management simulator provided for this sample use case is an instance of an Inventory Management model. Other more complex instances of this model can easily be built for different scenarios and use cases (see https://cosmotech.com/platform/ for more information). The following is a short summary of the conceptual model, where only the most important elements, useful for a better understanding of the provided instance simulator and is interaction with the Bonsai brain, are mentioned.
+
+<img src="Images/InventoryManagementConceptualModel.png" alt="drawing" width="800"/>
+
 
 ### Main entity types: 
 There are three main entity types : SupplyChain, Inventory and Facility. Facility is an abstract type and is thus not used explicitly in the sample instance model; instead, there are three concrete types of Facility, two of them used in the sample model (Retailer, Supplier), a third, ProductionOperation, is not used in this instance but is available for more complex models.
@@ -25,9 +33,14 @@ A SupplyChain is composed of Facilities that contain Inventories, as well as Inf
 All communication and transport interactions occur at the inventory level, quantities are shipped and orders are sent from one inventory to another through the information and logistics networks, respectively. 
 Orders are transmitted without delay through communication channels from one inventory to another. Shipments, on the other hand, can take some time to be delivered and this delay can be uncertain; Transport type entities are in charge of this process.
 
+
+
 ### Instance model
 
-Quantities travel throuhg two different kind of transports
+Quantities travel through two different kind of transports
+
+<img src="Images/InventoryManagementBonsaiSampleInstance_LogisticsNetwork.png" alt="drawing" width="800"/>
+
 
 ### Default simulator initial configuration
 
