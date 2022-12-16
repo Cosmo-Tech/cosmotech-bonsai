@@ -36,7 +36,7 @@ Orders are transmitted without delay through communication channels from one inv
 ### Instance model
 
 The following figure shows the information network for this sample, with direct ordering channels from the Retailers' inventories to the supplier and indirect ordering through the Hub.
-<img src="Images/InventoryManagementBonsaiSampleInstance_LogisticsNetwork.png" alt="drawing" width="800"/>
+<img src="Images/InventoryManagementBonsaiSampleInstance_InformationNetwork.png" alt="drawing" width="800"/>
 
 Quantities travel through two different kind of transports, the following figure shows the topology of the logistics network.
 
