@@ -46,8 +46,28 @@ Quantities travel through two different kind of transports
 
 The following parameter initial values are given for information about the simulator behavior. Note however that these variables are not all available for configuration from the inkling file (for those values, refer to 'Connection to Bonsai -> Simulator configuration' below).
 
-* Supplier:
- * Capacity: infinite
+* Supplier Capacity: infinite
+* OnHandInventory:
+  * Inventory1: 50 
+  * Inventory2: 50
+  * InventoryHub: 50
+  * InventorySupplier: 300
+* IncomePerPiece:
+  * Retailer1: 100
+  * Retailer2: 200 
+* Transport TransportTime:
+  * Truck1: 1
+  * Truck2: 1
+  * Plane1: 2
+  * Plane2: 2
+  * Train: U[5,7]  (uncertain, uniformly distributed)
+* TransportCostPerPiece:
+  * Truck1: 3
+  * Truck2: 3
+  * Plane1: 25
+  * Plane2: 25
+  * Train: 5
+
 
 
 ### Processes scheduling and global Brain-Simulator behavior
