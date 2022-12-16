@@ -33,11 +33,12 @@ A SupplyChain is composed of Facilities that contain Inventories, as well as Inf
 All communication and transport interactions occur at the inventory level, quantities are shipped and orders are sent from one inventory to another through the information and logistics networks, respectively. 
 Orders are transmitted without delay through communication channels from one inventory to another. Shipments, on the other hand, can take some time to be delivered and this delay can be uncertain; Transport type entities are in charge of this process.
 
-
-
 ### Instance model
 
-Quantities travel through two different kind of transports
+The following figure shows the information network for this sample, with direct ordering channels from the Retailers' inventories to the supplier and indirect ordering through the Hub.
+<img src="Images/InventoryManagementBonsaiSampleInstance_LogisticsNetwork.png" alt="drawing" width="800"/>
+
+Quantities travel through two different kind of transports, the following figure shows the topology of the logistics network.
 
 <img src="Images/InventoryManagementBonsaiSampleInstance_LogisticsNetwork.png" alt="drawing" width="800"/>
 
