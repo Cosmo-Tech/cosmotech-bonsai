@@ -10,15 +10,22 @@ Demo instance of the Cosmo Tech Inventory Management conceptual model
 Inventory management of supply chain inventories under uncertain and volatile demand.
 
 ## Overview
-The model represents a simple supply chain that consists of two retailers, a single supplier and a centralized storage hub. Each one of these facilities has a single inventory. The demand received by the retailers is uncertain, fluctuating and strong unpredictable peaks can occur. Inventories at each retailer must decide how much to order each week, what percentage of these orders must be sent directly to the supplier to be received quickly by plane, and what percentage can be ordered to the central hub and received by truck. The central hub send orders to the supplier, it must decide how much to order each week to be able to respond to the retailers' orders but taking into account costs of storage. It can store large quantities and is located near the retailers so that shipments can be delivered quickly by truck. Shippments from the supplier to the hub are sent by train, the travel time is longer and uncertain. Plane shipping is much more expensive but it is received faster to avoid backlog penalties.
 
-Uncertainties in demand and transport time, trade-offs between delivery speed and transport and storage costs, competition between retailers at each time step for available upstream stocks, lags between decisions and the results of these decisions, and coupling and interferences between individual decisions, strongly hinders the ability of a supply chain manager to take optimal decisions.
+This sample provides an example of AI control for the optimal management of inventories in a supply chain. It provides an instance of an Inventory Management Cosmo Tech simulator and an Inkling file to train a Bonsai brain. It illustrates that even in a seemingly simple supply chain with a few nodes, uncertainties, capacity constraints and competing interactions can make its behavior complex and its daily operation very hard.  It shows that the use of a Simulation Digital Twin to train an autonomous Brain agent with reinforcement learning for discovering adapted decision policies is able to cope with this complex dynamics and is therefore an appropriate solution to the management problem.
 
-An intelligent global control policy for the management of the supply chain inventories is thus needed. It must decide how much each retailer must order directly to the supplier and how much to the hub, and how much the hub must order, at each time step, in order to be able to respond to the demand, reduce costs and maximize profit. In addition, it must respect eventual stocks constraints and minimum service level requirements, and all this under an uncertain and volatile demand.
+### The Simulator
+
+The model represents a simple supply chain that consists of two retailers, a single supplier and a centralized storage hub, each of these facilities has a single inventory. The demand received by the retailers is uncertain, fluctuating and strong unpredictable peaks can occur. Inventories at each retailer must decide how much to order each week, what percentage of these orders must be sent directly to the supplier to be received quickly by plane, and what percentage can be ordered to the central hub and received by truck. The central hub send orders to the supplier, it must decide how much to order each week to be able to respond to the retailers' orders and build a safe stock. It can store large quantities and is located near the retailers so that shipments can be delivered quickly by truck but costs of storage must be taken into account. Shippments from the supplier to the hub are sent by train, the travel time is longer and uncertain. Plane shipping is much more expensive but it is received faster to avoid backlog penalties.
+
+### The Challenge
+
+Trade-offs between delivery speed and transport and storage costs, uncertainties in transport time, competition between retailers for available stocks, lags between decisions and the results of these decisions, coupling and interference between individual decisions, and an uncertain and volatile demand, strongly hinders the ability of a supply chain manager to make optimal decisions. The need to respect stock constraints and minimum service level requirements, makes the problem even harder.
+
+An intelligent and adaptive global control policy is needed in order to build a resilient inventory management system able to fulfill the demand and maximize profit in such a complex and uncertain setting. It must decide how much each retailer must order directly to the supplier and how much to the hub, and how much the hub must order, at each time step, in order to be able to respond to the demand, reduce costs and maximize profit. In addition, it must respect eventual stocks constraints and minimum service level requirements, and all this under an uncertain and volatile demand.
 
 ### Inventory Management conceptual model
 
-The inventory management simulator provided for this sample use case is an instance of an Inventory Management model. Other more complex instances of this model can easily be built for different scenarios and use cases (see https://cosmotech.com/platform/ for more information). The following is a short summary of the conceptual model, where only the most important elements, useful for a better understanding of the provided instance simulator and is interaction with the Bonsai brain, are mentioned.
+The model provided is a simple instance of a more generic conceptual model that can be used to simulate and optimize more complex supply chains. Other conceptual models of any type of organization and industry, and instances for different scenarios and use cases, can be built with the Cosmo Tech simulation platform (see https://cosmotech.com/platform/ for more information). The following is a short summary of this conceptual model, where only the most important elements, useful for a better understanding of the provided instance simulator and is interaction with the Bonsai brain, are mentioned.
 
 <img src="Images/InventoryManagementConceptualModel.png" alt="drawing" width="800"/>
 
@@ -35,10 +42,15 @@ Orders are transmitted without delay through communication channels from one inv
 
 ### Instance model
 
-The following figure shows the information network for this sample, with direct ordering channels from the Retailers' inventories to the supplier and indirect ordering through the Hub.
+The following figure illustrates the hierarchical structure of the sample model. The detailed network topology of the Logistics and Transport networks are shown further below.
+
+<img src="Images/InventoryManagementBonsaiSampleInstanceModel.png" alt="drawing" width="800"/>
+
+The information network has direct ordering channels from the Retailers' inventories to the supplier and indirect ordering channels through the Hub.
+
 <img src="Images/InventoryManagementBonsaiSampleInstance_InformationNetwork.png" alt="drawing" width="800"/>
 
-Quantities travel through two different kind of transports, the following figure shows the topology of the logistics network.
+The transportation network topology is shown below. Quantities are sent from the supplier either by plane to the retailers or by train to the hub and then by truck.
 
 <img src="Images/InventoryManagementBonsaiSampleInstance_LogisticsNetwork.png" alt="drawing" width="800"/>
 
