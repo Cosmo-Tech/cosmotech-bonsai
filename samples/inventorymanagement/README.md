@@ -1,8 +1,11 @@
 # Inventory Management sample<!-- omit from toc --> 
 Demo instance of the Cosmo Tech Inventory Management conceptual model
 
+## Files available in this folder<!-- omit from toc --> 
+* README.me (this file): describes the Inventory Management demo simulator provided by the sample as well as the connector to Bonsai
+* Cosmo_Tech_Inventory_Management_Demo_With_Bonsai.pdf: slides describing the sample project in more detail
+
 ## Contents<!-- omit from toc -->
-- [Files available in this folder:](#files-available-in-this-folder)
 - [Use case](#use-case)
 - [Overview](#overview)
   - [The Simulator](#the-simulator)
@@ -21,10 +24,6 @@ Demo instance of the Cosmo Tech Inventory Management conceptual model
     - [Brain actions](#brain-actions)
     - [Simulator configuration](#simulator-configuration)
 
-
-## Files available in this folder:
-* README.me (this file): describes the Inventory Management demo simulator provided by the sample as well as the connector to Bonsai
-* Cosmo_Tech_Inventory_Management_Demo_With_Bonsai.pdf: slides describing the sample project in more detail
 
 
 ## Use case
