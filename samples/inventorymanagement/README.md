@@ -1,3 +1,23 @@
+- [Inventory Management sample](#inventory-management-sample)
+  - [Files available in this folder:](#files-available-in-this-folder)
+  - [Use case](#use-case)
+  - [Overview](#overview)
+    - [The Simulator](#the-simulator)
+    - [The Challenge](#the-challenge)
+    - [Inventory Management conceptual model](#inventory-management-conceptual-model)
+    - [Main entity types:](#main-entity-types)
+      - [Hierarchical structure and control](#hierarchical-structure-and-control)
+      - [Interaction networks, communication and transport](#interaction-networks-communication-and-transport)
+    - [Instance model](#instance-model)
+    - [Default simulator initial configuration](#default-simulator-initial-configuration)
+    - [Processes scheduling and global Brain-Simulator behavior](#processes-scheduling-and-global-brain-simulator-behavior)
+    - [Connection to Bonsai](#connection-to-bonsai)
+      - [Available simulator states](#available-simulator-states)
+        - [For training :](#for-training-)
+        - [Additional simulator outputs used for monitoring, not used for training](#additional-simulator-outputs-used-for-monitoring-not-used-for-training)
+      - [Brain actions](#brain-actions)
+      - [Simulator configuration](#simulator-configuration)
+
 # Inventory Management sample
 Demo instance of the Cosmo Tech Inventory Management conceptual model
 
